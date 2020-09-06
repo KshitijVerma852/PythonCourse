@@ -8,7 +8,6 @@ class Node {
 class LinkedList {
     constructor(value) {
         this.length = 1;
-        this.index = 1;
         this.head = {
             value: value,
             next: null,
