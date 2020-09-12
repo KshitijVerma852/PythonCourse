@@ -35,7 +35,7 @@ class LinkedList {
         const newNode = new Node(value);
         newNode.next = this.head;
         this.head = newNode;
-        this.head = newNode;
+        this.tail = newNode;
         this.length++;
     }
     traverseToIndex(index) {
@@ -47,7 +47,7 @@ class LinkedList {
         }
         return currendNode;
     }
-    insertToIndex(index, value) {
+    insertAtIndex(index, value) {
         const prevNode = this.traverseToIndex(index - 1);
         const afterNode = this.traverseToIndex(index + 1);
         const newNode = new Node(value);
@@ -92,18 +92,35 @@ class LinkedList {
             console.log("Invalid Index");
         }
     }
-    deleteAllNodeWithValue(value) {
-        let currentNode = this.head;
-        let counter = 0;
-        while (currentNode != null) {
-            if (currentNode.value == value) {
-                this.deleteAtIndex(counter);
-                continue;
+    deleteAllWithValue(value) {
+        let currendNode = this.head;
+        while (currendNode != null) {
+            // console.log("Here");
+            // console.log(this.length);
+            if (
+                currendNode.value === value &&
+                currendNode != this.head &&
+                currendNode != this.tail
+            ) {
+                console.log("Here");
+                const prevNode = currendNode.prev;
+                const nextNode = currendNode.next;
+                prevNode.next = nextNode;
+                nextNode.prev = prevNode;
             }
-            currentNode = currentNode.next;
-            counter++;
+            currendNode = currendNode.next;
         }
-        this.length -= counter;
+        let currendNode2 = this.head;
+        if (currendNode.prev === null) {
+            // let nextNode = this.traverseToIndex(1);
+            console.log("Here");
+            this.head = this.traverseToIndex(1);
+            this.deleteAtIndex(0);
+        } else if (currendNode.next === null) {
+            let prevNode = this.traverseToIndex(this.length - 2);
+            this.tail = prevNode;
+            this.deleteAtIndex(this.length - 1);
+        }
     }
 }
 
@@ -111,12 +128,16 @@ llist1 = new LinkedList(1);
 llist1.append(2);
 llist1.append(3);
 llist1.append(4);
-llist1.prepend(10);
-llist1.insertToIndex(2, 100);
-llist1.deleteAtIndex(2);
+llist1.append(4);
+llist1.append(4);
+llist1.append(4);
 llist1.append(1);
-llist1.append(1);
-llist1.append(1);
-llist1.deleteAllNodeWithValue(1);
-const ans = llist1.show();
-console.log(ans);
+llist1.append(5);
+llist1.append(5);
+llist1.append(5);
+llist1.append(7);
+llist1.append(4);
+llist1.append(4);
+llist1.append(5);
+llist1.deleteAllWithValue(5);
+console.log(llist1.show());
