@@ -66,13 +66,13 @@ class LinkedList {
     }
     deleteAtIndex(index) {
         if (this.legalIndex(index)) {
-            if (index == 0) {
+            if (index === 0) {
                 const afterNode = this.traverseToIndex(index + 1);
                 this.head.next = null;
                 afterNode.prev = null;
                 this.head = afterNode;
                 this.length--;
-            } else if (index == this.length - 1) {
+            } else if (index === this.length - 1) {
                 const beforeNode = this.traverseToIndex(index - 1);
                 beforeNode.next = null;
                 this.tail.prev = null;
