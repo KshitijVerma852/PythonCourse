@@ -92,52 +92,34 @@ class LinkedList {
             console.log("Invalid Index");
         }
     }
-    deleteAllWithValue(value) {
+    deleteAllNodeWithValue(value) {
         let currendNode = this.head;
         while (currendNode != null) {
-            // console.log("Here");
-            // console.log(this.length);
-            if (
-                currendNode.value === value &&
-                currendNode != this.head &&
-                currendNode != this.tail
-            ) {
-                console.log("Here");
-                const prevNode = currendNode.prev;
-                const nextNode = currendNode.next;
-                prevNode.next = nextNode;
-                nextNode.prev = prevNode;
+            if (currendNode.value === value) {
+                if (currendNode === this.head) {
+                    this.deleteAtIndex(0);
+                } else if (currendNode === this.tail) {
+                    this.deleteAtIndex(this.length - 1);
+                } else {
+                    const prevNode = currendNode.prev;
+                    const nextNode = currendNode.next;
+                    prevNode.next = nextNode;
+                    nextNode.prev = prevNode;
+                    currendNode = prevNode;
+                    this.length--;
+                }
             }
             currendNode = currendNode.next;
-        }
-        let currendNode2 = this.head;
-        if (currendNode.prev === null) {
-            // let nextNode = this.traverseToIndex(1);
-            console.log("Here");
-            this.head = this.traverseToIndex(1);
-            this.deleteAtIndex(0);
-        } else if (currendNode.next === null) {
-            let prevNode = this.traverseToIndex(this.length - 2);
-            this.tail = prevNode;
-            this.deleteAtIndex(this.length - 1);
         }
     }
 }
 
-llist1 = new LinkedList(1);
+const llist1 = new LinkedList(1);
 llist1.append(2);
 llist1.append(3);
 llist1.append(4);
 llist1.append(4);
 llist1.append(4);
-llist1.append(4);
-llist1.append(1);
 llist1.append(5);
-llist1.append(5);
-llist1.append(5);
-llist1.append(7);
-llist1.append(4);
-llist1.append(4);
-llist1.append(5);
-llist1.deleteAllWithValue(5);
+llist1.deleteAllNodeWithValue(5);
 console.log(llist1.show());
