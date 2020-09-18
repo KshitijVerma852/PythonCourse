@@ -130,11 +130,24 @@ class LinkedList {
         }
         return false;
     }
+    reverse() {
+        if (this.isCircular()) {
+            console.log("The linked list is circular");
+        } else {
+            let currendNode = this.head;
+            for (let x = 0; x < this.length; x++) {
+                this.prepend(currendNode.value);
+                currendNode = currendNode.next;
+                this.deleteAtIndex(x + 1);
+            }
+        }
+    }
 }
 
 const llist1 = new LinkedList(1);
 llist1.append(2);
-llist1.append(2);
-llist1.append(2);
-llist1.append(2);
+llist1.append(3);
+llist1.append(4);
+llist1.append(5);
+llist1.reverse();
 console.log(llist1.show());
