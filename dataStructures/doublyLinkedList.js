@@ -18,10 +18,6 @@ class LinkedList {
     show() {
         let ans = [];
         let currentNode = this.head;
-        // while (currentNode != null) {
-        //     ans.push(currentNode.value);
-        //     currentNode = currentNode.next;
-        // }
         for (let x = 0; x < this.length; x++) {
             ans.push(currentNode.value);
             currentNode = currentNode.next;
