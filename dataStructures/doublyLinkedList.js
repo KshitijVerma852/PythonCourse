@@ -18,7 +18,11 @@ class LinkedList {
     show() {
         let ans = [];
         let currentNode = this.head;
-        while (currentNode != null) {
+        // while (currentNode != null) {
+        //     ans.push(currentNode.value);
+        //     currentNode = currentNode.next;
+        // }
+        for (let x = 0; x < this.length; x++) {
             ans.push(currentNode.value);
             currentNode = currentNode.next;
         }
@@ -97,6 +101,7 @@ class LinkedList {
         while (currendNode != null) {
             if (currendNode.value === value) {
                 if (currendNode === this.head) {
+                    this.head = currendNode.next;
                     this.deleteAtIndex(0);
                 } else if (currendNode === this.tail) {
                     this.deleteAtIndex(this.length - 1);
@@ -112,14 +117,28 @@ class LinkedList {
             currendNode = currendNode.next;
         }
     }
+    makeCircular() {
+        this.tail.next = this.head;
+        this.head.prev = this.tail;
+    }
+    isCircular() {
+        let tempArray = [];
+        let currendNode = this.head;
+        while (currendNode != null) {
+            if (tempArray.length > this.length) {
+                return true;
+            } else {
+                tempArray.push(currendNode.value);
+                currendNode = currendNode.next;
+            }
+        }
+        return false;
+    }
 }
 
 const llist1 = new LinkedList(1);
 llist1.append(2);
-llist1.append(3);
-llist1.append(4);
-llist1.append(4);
-llist1.append(4);
-llist1.append(5);
-llist1.deleteAllNodeWithValue(5);
+llist1.append(2);
+llist1.append(2);
+llist1.append(2);
 console.log(llist1.show());
