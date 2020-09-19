@@ -48,14 +48,19 @@ class LinkedList {
         return currendNode;
     }
     insertAtIndex(index, value) {
-        const prevNode = this.traverseToIndex(index - 1);
-        const afterNode = this.traverseToIndex(index + 1);
-        const newNode = new Node(value);
-        prevNode.next = newNode;
-        newNode.prev = prevNode;
-        newNode.next = afterNode;
-        afterNode.prev = newNode;
-        this.length++;
+        if (this.legalIndex(index)) {
+            if (index === 0) {
+                this.prepend(value);
+            } else if (index === this.length - 1) {
+                this.append(value);
+            } else {
+                const prevNode = this.traverseToIndex(index - 1);
+                const nextNode = this.traverseToIndex(index + 1);
+                const newNode = new Node(value, nextNode, prevNode);
+                prevNode.next = newNode;
+                nextNode.prev = newNode;
+            }
+        }
     }
     legalIndex(index) {
         if (index < 0 || index >= this.length) {
@@ -150,4 +155,5 @@ llist1.append(3);
 llist1.append(4);
 llist1.append(5);
 llist1.reverse();
+llist1.insertAtIndex(3, 100);
 console.log(llist1.show());
