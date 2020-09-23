@@ -7,11 +7,7 @@ class Node {
 }
 class LinkedList {
     constructor(value) {
-        this.head = {
-            value: value,
-            next: null,
-            prev: null,
-        };
+        this.head = new Node(value, null, null)
         this.tail = this.head;
         this.length = 1;
     }
@@ -147,13 +143,20 @@ class LinkedList {
             }
         }
     }
+    linearSearch(value) {
+        let currendNode = this.head;
+        for (let x = 0; x < this.length; x++) {
+            if (currendNode.value === value) {
+                return true;
+            } else {
+                currendNode = currendNode.next;
+            }
+        }
+        return false;
+    }
 }
 
 const llist1 = new LinkedList(1);
 llist1.append(2);
 llist1.append(3);
-llist1.append(4);
-llist1.append(5);
-llist1.reverse();
-llist1.insertAtIndex(3, 100);
 console.log(llist1.show());
