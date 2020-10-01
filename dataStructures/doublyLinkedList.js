@@ -7,7 +7,7 @@ class Node {
 }
 class LinkedList {
     constructor(value) {
-        this.head = new Node(value, null, null)
+        this.head = new Node(value, null, null);
         this.tail = this.head;
         this.length = 1;
     }
@@ -153,6 +153,10 @@ class LinkedList {
             }
         }
         return false;
+    }
+    updateValue(index, value) {
+        const currNode = this.traverseToIndex(index);
+        currNode.value = value;
     }
 }
 
