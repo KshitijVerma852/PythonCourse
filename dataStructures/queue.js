@@ -18,10 +18,15 @@ class Queue {
         this.length++;
     }
     dequeue() {
-        const tempNode = this.end.next;
-        tempNode.prev = null;
-        this.end.nect = null;
-        this.end = tempNode;
+        // const tempNode = this.end.next;
+        // tempNode.prev = null;
+        // this.end.nect = null;
+        // this.end = tempNode;
+        // this.length--;
+        const tempNode = this.start.prev;
+        this.start.prev = null;
+        tempNode.next = null;
+        this.start = tempNode;
         this.length--;
     }
     show() {
