@@ -7,7 +7,7 @@ const r1 = readline.createInterface({
 r1.question(">> ", (inputStr) => {
     const reverseInputStr = (inputStr) => {
         let ans = "";
-        for (let x = inputStr.length - 1; x > -1; x--) {
+        for (let x = inputStr.length - 1; x > -1; x--) { 
             ans += inputStr[x];
         }
         return ans;

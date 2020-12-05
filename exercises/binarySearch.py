@@ -44,9 +44,13 @@ print(data)
 selectionSort(data)
 print(data)
 while True:
-    theInput = int(input(">> "))
-
-    if binarySearch(data, theInput):
+    theInput = input(">> ")
+    if theInput == "exit":
+        print("Ok")
+        break
+    elif binarySearch(data, theInput):
+        theInput = int(theInput)
         print("Found")
     else:
         print("Not found")
+        theInput = int(theInput)

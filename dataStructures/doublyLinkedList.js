@@ -118,7 +118,7 @@ class LinkedList {
         this.tail.next = this.head;
         this.head.prev = this.tail;
     }
-    isCircular() {
+    isCircularMyWay() {
         let tempArray = [];
         let currendNode = this.head;
         while (currendNode != null) {

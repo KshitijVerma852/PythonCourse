@@ -1,12 +1,9 @@
 num = int(input(">> "))
 
-
-def factorialCalc(num):
+def findFactorial(num):
     if num == 1:
         return 1
-    return num * factorialCalc(num - 1)
+    
+    return num * findFactorial(num - 1)
 
-
-ans = factorialCalc(num)
-
-print(ans)
+print(findFactorial(num))

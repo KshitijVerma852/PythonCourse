@@ -89,10 +89,11 @@ class LinkedList:
                     self.deleteAtIndex(self.length - 1)
                 else:
                     prevNode = currNode.prevNode
-                    nextNode = currNode.nextNode
-                    prevNode.nextNode = nextNode
-                    nextNode.prevNode = prevNode
-                    currNode = prevNode
+                    nextnode = currNode.nextNode
+                    currNode.prevNode = None
+                    currNode.nextNode = None
+                    prevNode.nextNode = nextnode
+                    nextnode.prev = prevNode
                     self.length -= 1
             currNode = currNode.nextNode
 
@@ -132,6 +133,10 @@ class LinkedList:
                     tempList.append(currNode.valueOfNode)
                     currNode = currNode.nextNode
 
+    def updateValue(self, index, value):
+        currNode = self.traverseToIndex(index)
+        currNode.valueOfNode = value
+
     def show(self):
         currentNode = self.head
         ans = []
@@ -144,9 +149,11 @@ class LinkedList:
 llist1 = LinkedList(1)
 llist1.append(93)
 llist1.append(35)
+llist1.append(35)
+llist1.append(35)
 llist1.append(456)
 llist1.append(56)
 llist1.append(9)
+llist1.insertAtIndex(2, 100)
+# llist1.deleteAllNodeWithValue(35)
 llist1.show()
-llist1.makeCircular()
-print(llist1.isCircular())
