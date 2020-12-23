@@ -1,3 +1,10 @@
+function traverse(node) {
+    const tree = { value: node.value };
+    tree.left = node.left === null ? null : traverse(node.left);
+    tree.right = node.right === null ? null : traverse(node.right);
+    return tree;
+}
+
 class Node {
     constructor(left, value, right) {
         this.left = left;
@@ -9,26 +16,29 @@ class Node {
 class BinarySearchTree {
     constructor() {
         this.root = null;
+        this.length = 0;
     }
-    insert(value) {
-        const newNode = new Node(null, value, null);
-        if (this.root === null) {
-            this.root = newNode;
+    append(value) {
+        if (this.root == null) {
+            this.root = new Node(null, value, null);
+            this.length++;
         } else {
             let currNode = this.root;
             while (true) {
                 if (currNode.value > value) {
-                    // left
+                    // Go left
                     if (!currNode.left) {
-                        currNode.left = newNode;
+                        currNode.left = new Node(null, value, null);
+                        this.length++;
                         return this;
                     } else {
                         currNode = currNode.left;
                     }
                 } else {
-                    // right
+                    // Go right
                     if (!currNode.right) {
-                        currNode.right = newNode;
+                        currNode.right = new Node(null, value, null);
+                        this.length++;
                         return this;
                     } else {
                         currNode = currNode.right;
@@ -40,37 +50,38 @@ class BinarySearchTree {
     lookup(value) {
         let currNode = this.root;
         while (true) {
-            while (currNode.left || currNode.right) {
+            if (currNode.value == value) {
+                console.log("Found");
+                return this;
+            } else {
                 if (currNode.value > value) {
-                    // Left
-                    currNode = currNode.right;
-                } else if (currNode.value < value) {
-                    // Right
-                    currNode = currNode.left;
+                    // Go left
+                    if (!currNode.left) {
+                        console.log("Not found");
+                        return;
+                    } else {
+                        currNode = currNode.left;
+                    }
                 } else {
-                    console.log("Found");
-                    return this;
+                    // Go right
+                    if (!currNode.right) {
+                        console.log("Not found");
+                        return;
+                    } else {
+                        currNode = currNode.right;
+                    }
                 }
-            } 
+            }
         }
     }
 }
 
-const tr1 = new BinarySearchTree();
-tr1.insert(9);
-tr1.insert(4);
-tr1.insert(6);
-tr1.insert(20);
-tr1.insert(170);
-tr1.insert(15);
-tr1.insert(1);
-tr1.lookup(15)
-
-console.log(JSON.stringify(traverse(tr1.root)));
-
-function traverse(node) {
-    const tree = { value: node.value };
-    tree.left = node.left === null ? null : traverse(node.left);
-    tree.right = node.right === null ? null : traverse(node.right);
-    return tree;
-}
+const tree = new BinarySearchTree();
+tree.append(8);
+tree.append(29);
+tree.append(12);
+tree.append(3);
+tree.append(6);
+tree.append(55);
+tree.lookup(98);
+console.log(JSON.stringify(traverse(tree.root)));

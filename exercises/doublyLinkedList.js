@@ -170,6 +170,13 @@ class LinkedList {
         return false;
     }
 
+    peek() {
+        const prevNode = this.head.prev;
+        const nextNode = this.head.next;
+        const newNode = new Node(prevNode, value, nextNode);
+        return newNode;
+    }
+
     print() {
         let currNode = this.head;
         let ans = {};
