@@ -16,7 +16,7 @@ class B extends A {
 
 class C extends B {
     constructor() {
-        super(A);
+        super(B);
     }
 }
 

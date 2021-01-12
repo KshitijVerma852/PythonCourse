@@ -14,7 +14,7 @@ class LinkedList:
         self.circular = False
         self.length = 0
 
-    def makeCircular(self):
+    def _makeCircular(self):
         self.head.prev = self.tail
         self.tail.nexT = self.head
         self.circular = True
@@ -53,7 +53,7 @@ class LinkedList:
                 self.tail = newNode
                 self.length += 1
                 if self._isCircular:
-                    self.makeCircular()
+                    self._makeCircular()
             else:
                 self._decircularize()
                 self.circular = True
@@ -71,7 +71,7 @@ class LinkedList:
                 self.head = newNode
                 self.length += 1
                 if self.circular:
-                    self.makeCircular()
+                    self._makeCircular()
             else:
                 self._decircularize()
                 self.circular = True
@@ -99,7 +99,7 @@ class LinkedList:
                     nextNode.prev = newNode
                     self.length += 1
                     if self.circular:
-                        self.makeCircular()
+                        self._makeCircular()
                 else:
                     self._decircularize()
                     self.circular = True
@@ -133,14 +133,23 @@ class LinkedList:
     
     def deleteAllNodesWithValue(self, value):
         currNode = self.head
-        if self.circular:
+        if self._isCircular():
             self._decircularize()
+            self.circular = True
         while currNode != None:
             if currNode.value == value:
                 if currNode == self.head:
-                    self.delete(0)
+                    newHeadNode = self.head.nexT
+                    newHeadNode.prev = None
+                    self.head.nexT = None
+                    self.head = newHeadNode
+                    self.length -= 1
                 elif currNode == self.tail:
-                    self.delete(self.length - 1)
+                    newTailNode = self.tail.prev
+                    newTailNode.nexT = None
+                    self.tail.prev = None
+                    self.tail = newTailNode
+                    self.length -= 1
                 else:
                     prevNode = currNode.prev
                     nextNode = currNode.nexT
@@ -152,9 +161,10 @@ class LinkedList:
                     self.length -= 1
 
             currNode = currNode.nexT
+        
         if self.circular:
-            self.makeCircular()
-
+            self._makeCircular()
+                
     def printList(self):
         currNode = self.head
         ans = {}
@@ -166,12 +176,12 @@ class LinkedList:
 
 
 llist1 = LinkedList()
-llist1.append(16)
+llist1.append(56)
 llist1.append(34)
 llist1.append(16)
 llist1.append(16)
 llist1.prepend(10)
-llist1.makeCircular()
+llist1._makeCircular()
 llist1.insert(2, 12)
 llist1.delete(2)
 llist1.deleteAllNodesWithValue(16)
