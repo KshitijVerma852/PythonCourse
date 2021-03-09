@@ -159,8 +159,8 @@ class LinkedList:
                     nextNode.prev = prevNode
                     currNode = prevNode
                     self.length -= 1
-
-            currNode = currNode.nexT
+            else:
+                currNode = currNode.nexT
         
         if self.circular:
             self._makeCircular()

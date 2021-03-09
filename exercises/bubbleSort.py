@@ -12,3 +12,6 @@ for x in range(0, len(nums) - 1):
             nums[y], nums[y + 1] = nums[y + 1], nums[y]
 
 print(nums)
+
+if __name__ == "__main__":
+    print(nums)

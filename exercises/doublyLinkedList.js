@@ -186,21 +186,104 @@ class LinkedList {
         }
         return ans;
     }
+    reverse() {
+        const newArr = [];
+        let currNode = this.head;
+        while (currNode !== null) {
+            newArr.push(currNode.value);
+            currNode = currNode.next;
+        }
+        newArr.reverse();
+        return newArr;
+    }
+    checkForPalindrome() {
+        let leftNode = this.head;
+        let rightNode = this.tail;
+        let counter = 0;
+        while (leftNode.value === rightNode.value) {
+            if (counter > this.length / 2) {
+                return true;
+            } else {
+                counter++;
+                leftNode = leftNode.next;
+                rightNode = rightNode.prev;
+            }
+        }
+        return false;
+    }
+    deleteRecursive(node, value) {
+        if (node === null) {
+            return;
+        } else if (node.value === value) {
+            if (node.prev === null) {
+                const newNode = node.next;
+                newNode.prev = null;
+                this.head.next = null;
+                this.head = newNode;
+                this.length--;
+            } else if (node.next === null) {
+                const newNode = node.prev;
+                newNode.next = null;
+                this.tail.prev = null;
+                this.tail = newNode;
+                this.length--;
+            } else {
+                const prevNode = node.prev;
+                const nextNode = node.next;
+                node.prev = null;
+                node.next = null;
+                prevNode.next = nextNode;
+                nextNode.prev = prevNode;
+                node = prevNode;
+                this.length--;
+            }
+        }
+        return this.deleteRecursive(node.next, value);
+    }
+    showRecursive(node) {
+        if (node === null) {
+            return;
+        } else {
+            node.prev === null
+                ? process.stdout.write(`null <-- ${node.value} <--> `)
+            : node.next === null
+                ? process.stdout.write(`${node.value} --> null`)
+            : process.stdout.write(`${node.value} <--> `);
+            return this.showRecursive(node.next);
+        }
+    }
+    convertArrToLinkedList(arr) {
+        
+    }
 }
 
 const llist1 = new LinkedList();
-llist1.append(23);
-llist1.append(45);
-llist1.append(45);
-llist1.append(79);
-llist1.insertAtIndex(1, 100);
-llist1.append(45);
-llist1.insertAtIndex(1, 64);
-llist1.deleteAtIndex(0);
-llist1.append(45);
-llist1.deleteAtIndex(3);
-llist1.append(45);
-llist1.prepend(45);
-llist1.deleteAllNodesWithValue(45);
-llist1.updateValueAtIndex(1, 80);
-console.log(llist1.print());
+llist1.append(7);
+llist1.append(1);
+llist1.append(6);
+llist1.showRecursive(llist1.head);
+
+const llist2 = new LinkedList();
+llist2.append(5);
+llist2.append(9);
+llist2.append(2);
+
+function sumOfTwoLinkedLists(llist1, llist2) {
+    let llist1Total = 0;
+    let currNode = llist1.tail;
+    for (let x = llist1.length - 1; x > -1; x--) {
+        llist1Total += currNode.value * 10 ** x;
+        currNode = currNode.prev;
+    }
+
+    let llist2Total = 0;
+    let currNode2 = llist2.tail;
+    for (let x = llist1.length - 1; x > -1; x--) {
+        llist2Total += currNode2.value * 10 ** x;
+        currNode2 = currNode2.prev;
+    }
+
+    console.log(llist1Total + llist2Total);
+}
+
+// sumOfTwoLinkedLists(llist1, llist2);

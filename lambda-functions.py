@@ -5,7 +5,6 @@
 
 
 from math import pi as PI
-import mapFilterReduce
 print(round(PI, 2))
 
 add = lambda x, y:  x + y
@@ -13,15 +12,6 @@ add = lambda x, y:  x + y
 print(add(3, 4))
 
 
-# array = [24, 45, 13]
+array = [24, 45, 13, 62, 58]
 
-# newArray = mapFilterReduce.reduce(lambda x, y : x * y)
-
-# print(newArray)
-import random
-array = []
-
-for x in range(0, 10):
-    array.append(random.randrange(0, 10))
-
-print(array)
+print(list(filter(lambda num: num % 2 == 0, array)))

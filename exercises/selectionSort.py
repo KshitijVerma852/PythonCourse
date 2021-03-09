@@ -1,4 +1,4 @@
-nums = [5, 3, 8, 6, 7, 2]
+nums = [50, 63, 75, 52, 61, 66, 68, 55, 61, 60]
 
 for x in range(0, len(nums)):
     low = nums[x]

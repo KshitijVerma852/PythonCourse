@@ -132,15 +132,17 @@ class LinkedList {
         return false;
     }
     reverse() {
-        if (this.isCircular()) {
+        if (this.isCircularMyWay()) {
             console.log("The linked list is circular");
         } else {
+            const newLinkedList = new LinkedList(this.head.value);
             let currendNode = this.head;
             for (let x = 0; x < this.length; x++) {
-                this.prepend(currendNode.value);
+                newLinkedList.prepend(currendNode.value);
                 currendNode = currendNode.next;
-                this.deleteAtIndex(x + 1);
+                newLinkedList.deleteAtIndex(x + 1);
             }
+            return newLinkedList;
         }
     }
     linearSearch(value) {
@@ -161,6 +163,18 @@ class LinkedList {
 }
 
 const llist1 = new LinkedList(1);
+llist1.append(3);
 llist1.append(2);
 llist1.append(3);
-console.log(llist1.show());
+llist1.append(3);
+llist1.append(1);
+llist1.deleteAllNodeWithValue(3)
+console.log(llist1.show())
+console.log(llist1.reverse());
+
+if (llist1.reverse() === llist1) {
+    console.log(true);
+} else {
+    console.log(false);
+}
+
